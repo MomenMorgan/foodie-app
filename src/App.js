@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
+ import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
 import './index.css';
-import Product from './components/product';
+ import Header from './components/common/Header';
+import { Routes } from 'react-router-dom';
+
+
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element= {<Header/>}>
+
+      </Route>
+
+
+  )
+);
 
 function App() {
-  const [products, setProducts] = useState(null);
-
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products/1')
-      .then((res) => res.json())
-      .then((json) => {
-        setProducts(json);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, );
 
   return (
-    <div>
-      {products ? <Product product={products} /> : <p>Loading...</p>}
-    </div>
+  
+
+  <RouterProvider router={router}/> 
+   
   );
 }
 
