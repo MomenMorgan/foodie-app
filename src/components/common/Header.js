@@ -2,6 +2,7 @@ import {Outlet } from "react-router-dom";
 
 import TopBar from "../TopBar";
 import Mainbar from "../Mainbar";
+import MySwiper from "../Swiper";
 
 
 export default function Header() {
@@ -13,7 +14,7 @@ export default function Header() {
         <nav>
         <TopBar />
         <Mainbar /> 
-        <TopBar />
+        <MySwiper />
           
         </nav>
         
