@@ -13,6 +13,7 @@ export default function Header() {
         <nav>
         <TopBar />
         <Mainbar /> 
+        <TopBar />
           
         </nav>
         

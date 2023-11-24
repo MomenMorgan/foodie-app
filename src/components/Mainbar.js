@@ -49,7 +49,7 @@ export default function Mainbar() {
               />
             </button>
             
-            <div className="absolute my-20 bg-slate-100 w-40 z-10 rounded-lg shadow  ">
+            <div className="z-10 absolute my-16 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ">
                 <Dropdown show = {showDropdown} />
             </div>
             <div class="relative w-full">
