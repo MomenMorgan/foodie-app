@@ -14,7 +14,9 @@ export default function Header() {
         <nav>
         <TopBar />
         <Mainbar /> 
-        <MySwiper />
+        <div className="flex justify-center h-600px  ">
+          <MySwiper  width={"3/4"}/>
+        </div>
           
         </nav>
         
