@@ -5,15 +5,17 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import "./index.css";
-import Header from "./components/common/Header";
-import Main from "./components/common/Main";
 import Home from "./pages/Home";
 import Rootlayout from "./layouts/Rootlayout";
+import Catlist, { catLoader } from "./components/reecipes/Catlist";
+import Catdetails from "./components/reecipes/Catdetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Rootlayout />}>
-      <Route path="/" element={<Home/>}/>
+      <Route index element={<Home />} loader={catLoader} />
+
+      <Route path="details" element={<Catdetails />} />
     </Route>
   )
 );
