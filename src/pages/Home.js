@@ -1,10 +1,9 @@
-import { Outlet } from "react-router-dom"
-import Catlist from "../components/reecipes/Catlist"
+import Main from "../components/reecipes/Main"
 
 export default function Home() {
   return (
    <div>
-     <Catlist/>
+     <Main/>
       
    </div>
   )
