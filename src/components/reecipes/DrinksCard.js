@@ -5,6 +5,7 @@ import logo from "../../assets/images/s1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faC } from "@fortawesome/free-solid-svg-icons";
 import { faClockFour } from "@fortawesome/free-solid-svg-icons";
+import StarRating from "./StarRating";
 
 export default function DrinksCard({
   currentPage,
@@ -12,8 +13,8 @@ export default function DrinksCard({
   postsPerPage,
   indexOfFirstPost,
   indexOfLastPost,
-  len
-  }) {
+  len,
+}) {
   const data = useLoaderData();
 
   const {
@@ -21,54 +22,63 @@ export default function DrinksCard({
   } = data || {};
 
   const filterRecipes = documents.filter((el) =>
-    el.category.includes("656131c155fa025551457e36")
+    ["657a657b4577e638b6d8f2b4"].includes(el.category._id)
   );
 
   const currentPosts = filterRecipes.slice(indexOfFirstPost, indexOfLastPost);
 
- 
+  console.log(currentPosts);
   return (
-    <div className="">
-      <h1 className="font-montez text-4xl text-green-300 mt-2 lg:mt-8">Drinks</h1>
-      <div className="grid grid-cols-3 h-300px gap-8 ">
+    <div className="container mx-auto px-8">
+      <h1 className="font-montez text-3xl md:text-4xl text-green-300 mb-2 mt-4">
+        {currentPosts[0]?.category.name}
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8 w-40 md:w-auto">
         {currentPosts.map((el) => (
-          <div key={el._id} className="">
-            <Link className="">
-              <img src={el.image} alt=""className=" w-200px lg:w-300px h-200px lg:h-250px  shadow-xl dark:shadow-gray-800 transition-all duration-300 rounded-lg filter grayscale-0 hover:grayscale" />
+          <div
+            key={el._id}
+            className="bg-white rounded-lg overflow-hidden shadow-md transition duration-200 border-2 hover:border-green-200"
+          >
+            <Link to={`recipe/${el._id}`}>
+              <img
+                src={el.image}
+                alt={el.name}
+                className="w-full h-28 md:h-48 object-cover transition duration-300 grayscale-0 hover:grayscale  "
+              />
             </Link>
-            <div className="pl-4">
+            <div className="p-4">
               <div className="pt-2">
-              <div className="flex justify-between ">
-                <Link
-                  to={`details/${el._id}`.toString()}
-                  className="font-light text-xl"
-                >
-                  {el.name}
-                </Link>
+                <div className="flex justify-between">
+                  <Link
+                    to={`recipe/${el._id}`}
+                    className=" text-base md:text-lg font-semibold text-green-700 hover:text-green-600 truncate"
+                  >
+                    {el.name}
+                  </Link>
 
-                <p className="bg-green-200 w-1/5 h-1/4 text-sm font-light">
-                  <FontAwesomeIcon icon={faC} className="px-2" />
-                  {el.calories}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm font-light ">
-                  <FontAwesomeIcon icon={faClockFour} className="pr-2" />
+                  <p className="bg-green-200 text-xs font-semibold py-1 px-2 rounded h-1/3 w-1/3 md:w-1/4 text-center">
+                    <FontAwesomeIcon icon={faC} className="mr-1" />
+                    {el.calories}
+                  </p>
+                </div>
+                <p className="text-sm font-light">
+                  <FontAwesomeIcon icon={faClockFour} className="mr-1" />
                   {el.prep_time} minutes
                 </p>
+                <div className="flex justify-between items-center">
+                  <StarRating
+                    average={el.ratingsAverage}
+                    quantity={el.atingsQuantity}
+                  />
+                  <p className="text-sm font-light text-gray-500">
+                    {el.total_ratings} ratings
+                  </p>
+                </div>
               </div>
-            </div>
-              
             </div>
           </div>
         ))}
       </div>
-      <Pagination
-        totalRes={len}
-        postsPerPage={postsPerPage}
-        setCurrentPage={setCurrentPage}
-        isHidden={"hidden"}
-      />
     </div>
   );
 }

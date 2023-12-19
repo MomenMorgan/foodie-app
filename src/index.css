@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+
+@media (max-width: 768px) {
+  .recipe-link {
+    /* Adjust the max-width and max-height for smaller screens */
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+
+.recipe-link{
+        padding-left: 4px;
+}
+.swiper-pagination .swiper-pagination-bullet {
+  background-color: 	#F28C28;
+}

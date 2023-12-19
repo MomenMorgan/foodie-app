@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       height: {
+        "50px": "50px",
         "100px": "100px",
+        "150px": "150px",
         "200px": "200px",
         "250px": "250px",
         "300px": "300px",
@@ -15,7 +17,10 @@ module.exports = {
         "700px": "700px",
       },
       width: {
+        "50px": "50px",
         "100px": "100px",
+        "120px": "120px",
+        "150px": "150px",
         "200px": "200px",
         "250px": "250px",
         "300px": "300px",
@@ -35,6 +40,8 @@ module.exports = {
         "green-100": "#509E2F",
         "green-200": "#84BD00",
         "green-300": "#509E2F",
+        "green-800": "#b7cc95",
+        "green-900": "#273D24",
       },
     },
   },

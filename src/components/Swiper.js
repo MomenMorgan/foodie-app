@@ -1,5 +1,5 @@
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay  } from "swiper/modules";
 import s1 from "../assets/images/s1.jpg";
 import s2 from "../assets/images/s2.jpg";
 import s3 from "../assets/images/s3.jpg";
@@ -16,15 +16,21 @@ export default function MySwiper({ width, height }) {
   return (
     <Swiper
       // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      modules={[Navigation, Pagination, Scrollbar, A11y,Autoplay ]}
       spaceBetween={0}
       slidesPerView={1}
+      autoplay={{
+        delay:5000,
+        disableOnInteraction: false,
+    }}
+    speed={2500}
+    loop={true}
       pagination={{ clickable: true, el: ".swiper-pagination" }}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log("slide change")}
-      className={`w-${width} h-${height}`}
+      className={`w-full md:w-3/4 h-${height}`}
     >
-      <SwiperSlide className="  ">
+      <SwiperSlide className="  " >
         <div className="flex  ">
           <img
             src={logo1}
@@ -40,14 +46,30 @@ export default function MySwiper({ width, height }) {
       </SwiperSlide>
       <SwiperSlide>
         <div className="flex">
-          <img src={s2} alt="" className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black " />
-          <img src={logo2} alt="" className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black " />
+          <img
+            src={s2}
+            alt=""
+            className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black "
+          />
+          <img
+            src={logo1}
+            alt=""
+            className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black "
+          />
         </div>
       </SwiperSlide>
       <SwiperSlide>
         <div className="flex">
-          <img src={s3} alt="" className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black " />
-          <img src={logo2} alt="" className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black " />
+          <img
+            src={logo1}
+            alt=""
+            className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black "
+          />
+          <img
+            src={s3}
+            alt=""
+            className="  object-fill h-550px w-full rounded-xl  shadow-inner  shadow-black "
+          />
         </div>
       </SwiperSlide>
 
