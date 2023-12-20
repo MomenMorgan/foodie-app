@@ -66,7 +66,7 @@ export default function FetchColllection({
 
       const updatedRecipesData = { ...recipesData }; 
       updatedRecipesData[name] = updatedRecipesData[name].filter(
-        (recipe) => recipe.document._id !== recipeId
+        (recipe) => recipe?.document._id !== recipeId
       );
       
       
@@ -84,25 +84,25 @@ export default function FetchColllection({
 
   return (
     <div>
-      {currentPosts.map((el) => (
+      {currentPosts?.map((el) => (
         <div
           key={el._id}
           className="grid grid-cols-8 grid-rows-8 gap-2 items-center px-2 py-4 bg-neutral-50 rounded-md shadow-md "
         >
           {recipesData[el.name] &&
             recipesData[el.name].map((recipe) => (
-              <div key={recipe.document._id} className=" w-12/12  ">
+              <div key={recipe?.document._id} className=" w-12/12  ">
                 <Link to={`/recipe/${recipe.document._id}`}>
                   <img
-                    src={recipe.document.image}
-                    alt={recipe.document.name}
+                    src={recipe?.document.image}
+                    alt={recipe?.document.name}
                     className=" rounded-md shadow-xl hover:translate-y-2 transform transition-all duration-500 border ease-in-out h-150px -200px hover:border-green-300"
                   />
                 </Link>
                 <div className="bg-neutral-50 mt-4 text-center rounded-lg w-12/12">
                   <button
                     onClick={() =>
-                      deleteRecipeFromCollection(el._id, el.name,recipe.document._id) 
+                      deleteRecipeFromCollection(el._id, el.name,recipe?.document._id) 
                     }
                   >
                     <FontAwesomeIcon

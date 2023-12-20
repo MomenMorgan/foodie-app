@@ -17,7 +17,7 @@ export default function Pagenation({
   return (
     <div className={`${isHidden} ${styles} `}>
       {" "}
-      {pages.map((page, index) => {
+      {pages?.map((page, index) => {
         return (
           <button
             key={index}
