@@ -20,13 +20,13 @@ export default function Profile() {
   const [postsPerPage, setpostPerPage] = useState(1);
   const indexOfLastPost = currentPage * postsPerPage;
   const [collections, setCollections] = useState(
-    data.profileData.document.collections
+    data.profileData?.document.collections
   );
   const [name, setName] = useState(
-    data.profileData.document.name
+    data.profileData?.document.name
   );
   const [email, setEmail] = useState(
-    data.profileData.document.email
+    data.profileData?.document.email
   );
 
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -53,9 +53,9 @@ export default function Profile() {
 
           const fetchedUsersList = await fres.json();
           console.log(fetchedUsersList);
-          setCollections(fetchedUsersList.document.collections);
-          setEmail(fetchedUsersList.document.email)
-          setName(fetchedUsersList.document.name)
+          setCollections(fetchedUsersList?.document.collections);
+          setEmail(fetchedUsersList?.document.email)
+          setName(fetchedUsersList?.document.name)
 
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -82,9 +82,9 @@ export default function Profile() {
 
           const fetchedUsersList = await fres.json();
           console.log(fetchedUsersList);
-          setCollections(fetchedUsersList.document.collections);
-          setEmail(fetchedUsersList.document.email)
-          setName(fetchedUsersList.document.name)
+          setCollections(fetchedUsersList?.document.collections);
+          setEmail(fetchedUsersList?.document.email)
+          setName(fetchedUsersList?.document.name)
 
         } catch (error) {
           console.error("Error fetching user data:", error);

@@ -14,6 +14,7 @@ export default function UpdateRecipe() {
   const [seclectedRecipeId, setSelectedRecipeId] = useState("");
   const [selectedRecipe, setSelectedRecipe] = useState([]);
   const [filteredRecipe, setFilteredRecipe] = useState([]);
+  const [sub, setSub] = useState(selectedCategoryId);
   const [recipeData, setRecipeData] = useState({
     name: "",
     description: "",
@@ -29,19 +30,31 @@ export default function UpdateRecipe() {
 
   const token = localStorage.getItem("token");
   // Function to fetch categories and subcategories based on search term
-  const fetchCatSub = async () => {
+  const fetchCategory = async () => {
     try {
       const response = await fetch(`http://localhost:8080/categories?name`);
       const data = await response.json();
       if (data && data.documents && Array.isArray(data.documents)) {
         setCategories(data.documents);
       }
+    } catch (error) {
+      console.error("Error fetching categories and subcategories:", error);
+    }
+  };
 
-      const response2 = await fetch(`http://localhost:8080/subcategories?name`);
+  const fetchSubCategory = async () => {
+    try {
+      const response2 = await fetch(`http://localhost:8080/categories/${sub}/subcategories`);
       const data2 = await response2.json();
       if (data2 && data2.documents && Array.isArray(data2.documents)) {
         setSubCategories(data2.documents);
       }
+    } catch (error) {
+      console.error("Error fetching categories and subcategories:", error);
+    }
+  };
+    const fetchRecipe = async () => {
+    try{
       const response3 = await fetch(`http://localhost:8080/recipes?name`);
       const data3 = await response3.json();
       if (data3 && data3.documents && Array.isArray(data3.documents)) {
@@ -50,25 +63,25 @@ export default function UpdateRecipe() {
     } catch (error) {
       console.error("Error fetching categories and subcategories:", error);
     }
-  };
+    }
 
   // Update filtered categories and subcategories based on search terms
   useEffect(() => {
     setFilteredCategories(
       categories.filter((category) =>
-        category.name.toLowerCase().includes(searchTerm.toLowerCase())
+        category.name
       )
     );
     setFilteredSubCategories(
       subCategories.filter((subCategory) =>
-        subCategory.name.toLowerCase().includes(searchTerm2.toLowerCase())
+        subCategory.name
       )
     );
     setFilteredRecipe(selectedRecipe.filter((Recipe) =>
-    Recipe.name.toLowerCase().includes(searchTerm3.toLowerCase())
+    Recipe.category._id.includes(selectedCategoryId) && Recipe.subcategory._id.includes(selectedSubCategoryId)
   ))
-  }, [searchTerm, searchTerm2, categories, subCategories, selectedRecipe,searchTerm3]);
-
+  }, [ categories, subCategories, selectedRecipe,searchTerm3, selectedCategoryId, selectedSubCategoryId]);
+console.log(selectedRecipe)
   const updateRequest = async () => {
     try {
       const response = await fetch(
@@ -112,6 +125,7 @@ export default function UpdateRecipe() {
     const selectedCategoryId = event.target.value;
     setSelectedCategoryId(selectedCategoryId);
     setRecipeData({ ...recipeData, category: selectedCategoryId });
+    setSub(selectedCategoryId);
   };
 
   // Handling subcategory change
@@ -226,7 +240,7 @@ export default function UpdateRecipe() {
       <select
         style={selectStyle}
         onChange={handleCategoryChange}
-        onClick={fetchCatSub}
+        onClick={fetchCategory}
       >
         <option value="">Select Category</option>
         {filteredCategories.map((category) => (
@@ -235,7 +249,7 @@ export default function UpdateRecipe() {
           </option>
         ))}
       </select>
-      <select style={selectStyle} onChange={handleSubCategoryChange}>
+      <select style={selectStyle} onChange={handleSubCategoryChange} onClick={fetchSubCategory}>
         <option value="">Select Subcategory</option>
         {filteredSubCategories.map((subcategory) => (
           <option key={subcategory._id} value={subcategory._id}>
@@ -243,7 +257,7 @@ export default function UpdateRecipe() {
           </option>
         ))}
       </select>
-      <select style={selectStyle} onChange={handleRecipeChange}>
+      <select style={selectStyle} onChange={handleRecipeChange} onClick={fetchRecipe}>
         <option value="">Select Recipe </option>
         {filteredRecipe.map((recipe) => (
           <option key={recipe._id} value={recipe._id}>

@@ -9,6 +9,7 @@ export default function CreateRecipe() {
   const [filteredSubCategories, setFilteredSubCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
+  const [sub, setSub] = useState(selectedCategoryId);
 
   const [recipeData, setRecipeData] = useState({
     name: "",
@@ -25,7 +26,7 @@ export default function CreateRecipe() {
 
   const token = localStorage.getItem("token");
   // Function to fetch categories and subcategories based on search term
-  const fetchCatSub = async () => {
+  const fetchCategory = async () => {
     try {
       const response = await fetch(`http://localhost:8080/categories?name`);
       const data = await response.json();
@@ -33,7 +34,14 @@ export default function CreateRecipe() {
         setCategories(data.documents);
       }
 
-      const response2 = await fetch(`http://localhost:8080/subcategories?name`);
+    } catch (error) {
+      console.error("Error fetching categories and subcategories:", error);
+    }
+  };
+
+  const fetchSubCategory = async () => {
+    try {
+      const response2 = await fetch(`http://localhost:8080/categories/${sub}/subcategories`);
       const data2 = await response2.json();
       if (data2 && data2.documents && Array.isArray(data2.documents)) {
         setSubCategories(data2.documents);
@@ -47,15 +55,15 @@ export default function CreateRecipe() {
   useEffect(() => {
     setFilteredCategories(
       categories.filter((category) =>
-        category.name.toLowerCase().includes(searchTerm.toLowerCase())
+        category.name
       )
     );
     setFilteredSubCategories(
       subCategories.filter((subCategory) =>
-        subCategory.name.toLowerCase().includes(searchTerm2.toLowerCase())
+        subCategory.name
       )
     );
-  }, [searchTerm, searchTerm2, categories, subCategories,]);
+  }, [categories, subCategories]);
 
   const createRecipe = async () => {
      try {
@@ -97,7 +105,9 @@ export default function CreateRecipe() {
     const selectedCategoryId = event.target.value;
     setSelectedCategoryId(selectedCategoryId);
     setRecipeData({ ...recipeData, category: selectedCategoryId });
+    setSub(selectedCategoryId);
   };
+  console.log(selectedCategoryId)
 
   // Handling subcategory change
   const handleSubCategoryChange = (event) => {
@@ -134,8 +144,7 @@ export default function CreateRecipe() {
     color: '#FFF',
     border: 'none',
   };
-  
-  // Your component code...
+ console.log(filteredCategories);
   return (
     <div className="flex flex-col">
       <input
@@ -208,7 +217,7 @@ export default function CreateRecipe() {
           setRecipeData({ ...recipeData, image: e.target.value })
         }
       />
-      <select style={selectStyle} onChange={handleCategoryChange} onClick={fetchCatSub}>
+      <select style={selectStyle} onChange={handleCategoryChange} onClick={fetchCategory}>
         <option value="">Select Category</option>
         {filteredCategories.map((category) => (
           <option key={category._id} value={category._id}>
@@ -217,7 +226,7 @@ export default function CreateRecipe() {
         ))}
       </select>
       {/* Select subcategory */}
-      <select style={selectStyle} onChange={handleSubCategoryChange}>
+      <select style={selectStyle} onChange={handleSubCategoryChange} onClick={fetchSubCategory}>
         <option value="">Select Subcategory</option>
         {filteredSubCategories.map((subcategory) => (
           <option key={subcategory._id} value={subcategory._id}>
