@@ -137,8 +137,42 @@ console.log(selectedRecipe)
   const handleRecipeChange = (event) => {
     const selectedRecipeId = event.target.value;
     setSelectedRecipeId(selectedRecipeId);
+  
+    // Find the selected recipe data based on the ID
+    const foundRecipe = selectedRecipe.find(
+      (recipe) => recipe._id === selectedRecipeId
+    );
+  
+    // If the recipe is found, populate the input fields with its data
+    if (foundRecipe) {
+      const {
+        name,
+        description,
+        ingredients,
+        prep_time,
+        calories,
+        vegetarian,
+        diet,
+        category,
+        subcategory,
+        image,
+      } = foundRecipe;
+  
+      setRecipeData({
+        name,
+        description,
+        ingredients: ingredients,
+        prep_time,
+        calories,
+        vegetarian,
+        diet,
+        category: category._id,
+        subcategory: subcategory._id,
+        image,
+      });
+    }
   };
-
+  console.log(recipeData)
   const handleIngredientsChange = (e) => {
     const ingredients = e.target.value.split(",");
     setRecipeData({ ...recipeData, ingredients });
