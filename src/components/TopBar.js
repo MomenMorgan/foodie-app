@@ -37,17 +37,17 @@ export default function TopBar() {
     fetchUserData();
   }, [token]);
   return (
-    <div className="flex justify-between px-0 md:px-28 py-2 bg-black text-white shadow-xl">
+    <div className="flex justify-between px-2 md:px-28  py-2 bg-black text-white shadow-xl">
       <div className="flex">
         <Link
           to="/"
-          className="mr-8 text-sm md:text-base hover:text-green-200 transition-all duration-150 "
+          className="mr-4 text-sm md:text-base hover:text-green-200 transition-all duration-150 "
         >
           Home
         </Link>
         <Link
           to="/"
-          className="mr-8 text-sm md:text-base  hover:text-green-200 transition-all duration-150"
+          className="mr-4 text-sm md:text-base  hover:text-green-200 transition-all duration-150"
         >
           Books
         </Link>
@@ -61,35 +61,35 @@ export default function TopBar() {
       <div className="flex">
         {!token ? (
           <>
-            <Link to="/login" className="mr-8 text-sm md:text-base  hover:text-green-200 transition-all duration-150 ">
+            <Link to="/login" className="mr-8  sm:mr-0 text-sm md:text-base  hover:text-green-200 transition-all duration-150 ">
               <FontAwesomeIcon
                 icon={faRightToBracket}
                 className="mr-4 text-green-500"
               />
               Login
             </Link>
-            <Link to="/signup" className="mr-2 md:mr-0 text-sm md:text-base  hover:text-green-200 transition-all duration-150">
+            <Link to="/signup" className="mr-2 sm:mr-0 md:mr-0 text-sm md:text-base  hover:text-green-200 transition-all duration-150">
               <FontAwesomeIcon icon={faUser} className="mr-4 text-green-500" />
               Sign Up
             </Link>
           </>
         ) : (
           <button
-            className="mr-2 md:mr-4 text-sm md:text-base"
+            className="sm:mr-0 md:mr-4  text-sm md:text-base"
             onClick={handleLogout}
           >
-            <FontAwesomeIcon icon={faUser} className="mr-4 text-green-500" />
+            <FontAwesomeIcon icon={faUser} className="mr-2  text-green-500" />
             Logout
           </button>
         )}
         {token && user.document && user.document.role === "admin" ? (
           <Link
-            className="mr-2 md:mr-0 text-sm md:text-base"
+            className="mr-2 md:mr-0 text-sm md:text-base "
             to={"/AdminPanel"}
           >
             <FontAwesomeIcon
               icon={faUserTie}
-              className=" text-green-500 mr-2"
+              className=" text-green-500 mr-2 ml-2"
             />
             Admin Panel
           </Link>

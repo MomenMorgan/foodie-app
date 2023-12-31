@@ -18,7 +18,7 @@ export default function CategoriesList({ width, path }) {
   } = data || {};
 
   return (
-    <div className={`p-0 pl-0lg:p-10 lg:pl-28 ${width} mt-14 relative`}>
+    <div className={`p-0 pl-0 lg:pl-10 lg:w-2/12  ${width} relative`}>
       {/* Toggle button for medium screens */}
       <button
         className="block md:hidden relative md:absolute top-20 pb-4 pl-2 font-montez text-3xl text-green-100 cursor-pointer"

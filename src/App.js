@@ -19,12 +19,14 @@ import Profile from "./pages/Profile";
 import { profileLoader } from "./components/reecipes/loader";
 import AdminPanel from "./components/auth/AdminPanel";
 import Signup from "./components/auth/Signup";
+import SearchResult from "./components/reecipes/SearchResult";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<TokenProvider />}>
       <Route element={<ProtectedRoutes path={"/login"} />}>
         <Route path="/AdminPanel" element={<AdminPanel />} loader={catLoader} />
       </Route>
+      <Route path="/Search" element={<SearchResult/> } loader={catLoader}/>
 
       <Route path="/login" element={<Loginpage />} />
       <Route path="/signup" element={<Signup />} />

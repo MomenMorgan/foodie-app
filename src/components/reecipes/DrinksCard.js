@@ -29,11 +29,13 @@ export default function DrinksCard({
 
   console.log(currentPosts);
   return (
-    <div className="container mx-auto px-8">
-      <h1 className="font-montez text-3xl md:text-4xl text-green-300 mb-2 mt-4">
-        {currentPosts[0]?.category.name}
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8 w-40 md:w-auto">
+    <div className="">
+   <div className="text-center">
+       <h1 className="font-montez text-3xl md:text-4xl text-green-300 mb-2 mt-4 w-3/12">
+         {currentPosts[0]?.category.name}
+       </h1>
+   </div>
+      <div className="grid md:grid-cols-2   xs:w-12/12 sm:mx-auto lg:grid-cols-3 gap-8  md:w-11/12 xl:w-11/12 lg:w-11/12">
         {currentPosts.map((el) => (
           <div
             key={el._id}
@@ -46,17 +48,19 @@ export default function DrinksCard({
                 className="w-full h-28 md:h-48 object-cover transition duration-300 grayscale-0 hover:grayscale  "
               />
             </Link>
-            <div className="p-4">
+            <div className="xl:p-4 md:p-2 xs:p-2">
               <div className="pt-2">
                 <div className="flex justify-between">
                   <Link
                     to={`recipe/${el._id}`}
-                    className=" text-base md:text-lg font-semibold text-green-700 hover:text-green-600 truncate"
+                    className={` text-base md:text-lg font-semibold text-green-700 hover:text-green-600 md:whitespace-pre-wrap  lg:whitespace-nowrap${
+                      el.name.length > 10 ? "truncate" : null
+                    }`}
                   >
                     {el.name}
                   </Link>
 
-                  <p className="bg-green-200 text-xs font-semibold py-1 px-2 rounded h-1/3 w-1/3 md:w-1/4 text-center">
+                  <p className="bg-green-200 text-xs  font-semibold py-1 px-2 rounded h-1/3 w-1/3 md:w-1/4 text-center lg:w-1/3 xl:w-1/4 whitespace-nowrap">
                     <FontAwesomeIcon icon={faC} className="mr-1" />
                     {el.calories}
                   </p>

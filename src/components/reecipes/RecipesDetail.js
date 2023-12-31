@@ -64,6 +64,7 @@ export default function RecipesDetail() {
 
     fetchUserData();
   }, [token, document._id]);
+ 
 
   const fetchReviewsForRecipe = async (recipeId) => {
     try {
@@ -144,7 +145,7 @@ export default function RecipesDetail() {
   const isHidden = (id) => hiddenCollections.includes(id);
 
   return (
-    <div className="flex md:flex-row">
+    <div className="flex md:flex-row " >
       <CategoriesList width="w-1/4" />
       <div className="w-full md:w-3/4">
         <RecipesNav />
@@ -199,13 +200,13 @@ export default function RecipesDetail() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center " >
           <div className="w-full">
             <h2 className="text-2xl font-semibold text-green-100 mb-4">
               Related recipes
             </h2>
           </div>
-          <div className=" w-full md:w-1/2 flex flex-col md:flex-row justify-center md:justify-center bg-zinc-50 shadow-lg rounded-lg p-2">
+          <div className=" w-full md:w-1/2 flex flex-col md:flex-row justify-center md:justify-center bg-zinc-50 shadow-lg rounded-lg p-2" >
             {document &&
               RandomRecipes.map(
                 (el) =>
@@ -254,7 +255,7 @@ export default function RecipesDetail() {
               )}
           </div>
 
-          <div className="text-center mt-4">
+          <div className="text-center mt-4" >
             <button
               className="border-2 border-green-100 rounded-xl p-2 font-semibold hover:text-green-500 transition-all hover:border-black"
               onClick={togglePopup}
@@ -341,7 +342,7 @@ export default function RecipesDetail() {
             )}
           </div>
         </div>
-        <div className="mt-20">
+        <div className="mt-20" id="middle">
           <Reviews
             reviews={document.reviews}
             recipeId={document._id}
